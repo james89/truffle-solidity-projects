@@ -18,9 +18,55 @@ Stretch goals:
 */
 
 contract Splitter {
-    address public Bob;
-    address public Alice;
-    address public Carol;
+
+    /*
+     define state variables
+    */ 
+    address public owner;
+    address[] public receivers; 
+    uint public totalBalance;
+    
+    
+    
+    // ---  try to use structs after first completing with arrays ---
+    // struct EthReceiverStruct {
+    //     address receiverAddr;
+    //     uint balance;
+    // }
+    
+    // EthReceiverStruct[] public ethReceivers;
+    
+    function Splitter(){
+        owner = msg.sender;
+
+    }
+    
+    
+    function getBalance() public returns (uint) {
+        return totalBalance;
+    }
+
+    function distributeEther(address firstReceiver, address secondReceiver) payable returns(bool success) {
+        if(msg.value == 0) throw;
+        totalBalance += msg.value;
+        
+        // firstReceiver and secondReceiver passed in should be stored within an EthReceiverStruct
+        // EthReceiverStruct memory newReceiver;
+        // newReceiver[0].receiverAddr = firstReceiver;
+        // newReceiver[1].receiverAddr = secondReceiver;
+        // struct cannot be indexed? 
+        
+        
+        if(msg.sender == owner){
+          receivers[0] = firstReceiver;
+          receivers[1] = secondReceiver;
+            
+          // send the funds
+        }
+        
+        
+    }
+
     
     
     
